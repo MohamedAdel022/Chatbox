@@ -29,7 +29,7 @@ build release apk
 [bundle exec] fastlane android beta
 ```
 
-push to firebase app distribution
+push beta to firebase app distribution
 
 ----
 

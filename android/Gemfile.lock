@@ -228,6 +228,7 @@ PLATFORMS
 
 DEPENDENCIES
   abbrev
+  dotenv
   fastlane
   fastlane-plugin-firebase_app_distribution
   fiddle
