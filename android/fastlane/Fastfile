@@ -1,0 +1,29 @@
+require 'dotenv'
+Dotenv.load(File.expand_path('../../../.env', __FILE__))
+
+default_platform(:android)
+
+platform :android do
+  desc "build release apk"
+  lane :build_realase do
+    
+    #build realase apk
+    gradle(task: "assembleRelease")
+  end
+  
+  desc "push beta to firebase app distribution"
+  lane :beta do
+    
+    build_realase
+    android_app_path = "../build/app/outputs/apk/release/app-release-unsigned.apk"
+    firebase_app_distribution(
+      app: "1:546588628816:android:49e068753d9134df107e55",
+      firebase_cli_token: ENV['FIREBASE_CLI_TOKEN'],
+      groups: "mo",
+      android_artifact_path: android_app_path
+
+    )
+  end
+
+
+end
