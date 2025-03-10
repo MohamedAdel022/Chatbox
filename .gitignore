@@ -1,4 +1,8 @@
 *.env
+t.cpp
+test.cpp
+t.exe
+test.exe
 # Miscellaneous
 *.class
 *.log
