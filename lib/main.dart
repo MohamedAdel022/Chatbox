@@ -14,9 +14,6 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await ScreenUtil.ensureScreenSize();
-  runApp(const ChatBoxAPP());
   FlutterNativeSplash.remove();
+  runApp(const ChatBoxAPP());
 }
-
-
-

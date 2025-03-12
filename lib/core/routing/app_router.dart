@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../features/auth/presentation/pages/login_screen.dart';
-import '../../features/auth/presentation/pages/signup_screen.dart';
-import '../../features/home/presentation/pages/home_screen.dart';
-import '../../features/onboarding/presentation/pages/onboarding_screen.dart';
+import '../../features/auth/presentation/views/login_screen.dart';
+import '../../features/auth/presentation/views/signup_screen.dart';
+import '../../features/home/presentation/views/home_screen.dart';
+import '../../features/onboarding/presentation/views/onboarding_screen.dart';
 import 'routes.dart';
 
 class AppRouter {

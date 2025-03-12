@@ -1,4 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<application
+    android:enableOnBackInvokedCallback="true">
     <application
         android:label="Chatbox"
         android:name="${applicationName}"
