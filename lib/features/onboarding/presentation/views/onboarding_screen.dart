@@ -1,7 +1,11 @@
+import 'package:chat/core/routing/routes.dart';
 import 'package:chat/core/theme/app_text_style.dart';
 import 'package:chat/core/utils/assets.dart/assets.dart';
+import 'package:chat/core/widgets/custom_button.dart';
 import 'package:chat/features/onboarding/presentation/views/widgets/logo_image.dart';
+import 'package:chat/features/onboarding/presentation/views/widgets/onboarding_text_title.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OnBoardingScreen extends StatelessWidget {
@@ -35,28 +39,51 @@ class OnBoardingScreen extends StatelessWidget {
                   SizedBox(
                     height: 50.h,
                   ),
-                  Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text: 'Connect\n',
-                          style: AppTextStyle.regular68,
-                        ),
-                        TextSpan(
-                          text: 'friends\n',
-                          style: AppTextStyle.regular68,
-                        ),
-                        TextSpan(
-                          text: 'easily &\n',
-                          style: AppTextStyle.simiBold68,
-                        ),
-                        TextSpan(
-                          text: 'quickly\n',
-                          style: AppTextStyle.simiBold68,
-                        ),
-                      ],
-                    ),
+                  OnboradingTextTitle(),
+                  SizedBox(
+                    height: 20.h,
                   ),
+                  Text(
+                    "Our chat app is the perfect way to stay connected with friends and family.",
+                    style: AppTextStyle.regular16,
+                  ),
+                  Spacer(
+                    flex: 2,
+                  ),
+                  CustomButton(
+                    text: 'Get Started',
+                    onPressed: () {
+                      Navigator.pushNamed(context, Routes.signupScreen);
+                    },
+                    backgroundColor: Colors.white,
+                    foregroundColor: Colors.black,
+                    width: double.infinity,
+                    height: 50.h,
+                    borderRadius: 10,
+                  ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  Center(
+                    child: RichText(
+                        text: TextSpan(children: [
+                      TextSpan(
+                        text: 'Existing account?',
+                        style: AppTextStyle.regular14,
+                      ),
+                      TextSpan(
+                        text: ' Log in',
+                        style: AppTextStyle.medium14,
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.pushNamed(context, Routes.loginScreen);
+                          },
+                      ),
+                    ])),
+                  ),
+                  Spacer(
+                    flex: 1,
+                  )
                 ],
               ),
             )
