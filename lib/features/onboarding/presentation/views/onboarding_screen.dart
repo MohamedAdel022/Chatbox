@@ -43,12 +43,16 @@ class OnBoardingScreen extends StatelessWidget {
                   SizedBox(
                     height: 20.h,
                   ),
-                  Text(
-                    "Our chat app is the perfect way to stay connected with friends and family.",
-                    style: AppTextStyle.regular16,
+                  Padding(
+                    padding: EdgeInsets.only(right: 19.w),
+                    child: Text(
+                      textAlign: TextAlign.left,
+                      "Our chat app is the perfect way to stay connected with friends and family.",
+                      style: AppTextStyle.regular16,
+                    ),
                   ),
                   Spacer(
-                    flex: 2,
+                    flex: 5,
                   ),
                   CustomButton(
                     text: 'Get Started',
@@ -61,8 +65,8 @@ class OnBoardingScreen extends StatelessWidget {
                     height: 50.h,
                     borderRadius: 10,
                   ),
-                  SizedBox(
-                    height: 20.h,
+                  Spacer(
+                    flex: 1,
                   ),
                   Center(
                     child: RichText(
@@ -82,7 +86,7 @@ class OnBoardingScreen extends StatelessWidget {
                     ])),
                   ),
                   Spacer(
-                    flex: 1,
+                    flex: 2,
                   )
                 ],
               ),

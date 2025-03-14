@@ -29,7 +29,7 @@ abstract class AppTextStyle {
     fontFamily: 'Circular Std',
     fontWeight: FontWeight.w400,
     height: 1,
-    letterSpacing: 0.10,
+    letterSpacing: 0.3,
   );
   static TextStyle medium14 = TextStyle(
     color: Colors.white,
@@ -38,5 +38,12 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w500,
     height: 1,
     letterSpacing: 0.10,
+  );
+  static TextStyle simiBold18 = TextStyle(
+    color: Color(0xFF000D07),
+    fontSize: 18,
+    fontFamily: 'Caros',
+    fontWeight: FontWeight.w600,
+    height: 1,
   );
 }
