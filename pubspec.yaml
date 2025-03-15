@@ -71,6 +71,9 @@ flutter:
     - family: CircularStd-Book
       fonts:
         - asset: assets/fonts/CircularStd-Book.ttf
+    - family: Caros
+      fonts:
+        - asset: assets/fonts/cretypeCaros.otf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

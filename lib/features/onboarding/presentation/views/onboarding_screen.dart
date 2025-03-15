@@ -48,7 +48,7 @@ class OnBoardingScreen extends StatelessWidget {
                     child: Text(
                       textAlign: TextAlign.left,
                       "Our chat app is the perfect way to stay connected with friends and family.",
-                      style: AppTextStyle.regular16,
+                      style: AppTextStyle.regularGrey16,
                     ),
                   ),
                   Spacer(
@@ -73,11 +73,11 @@ class OnBoardingScreen extends StatelessWidget {
                         text: TextSpan(children: [
                       TextSpan(
                         text: 'Existing account?',
-                        style: AppTextStyle.regular14,
+                        style: AppTextStyle.regularGrey14,
                       ),
                       TextSpan(
                         text: ' Log in',
-                        style: AppTextStyle.medium14,
+                        style: AppTextStyle.mediumWhite14,
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
                             Navigator.pushNamed(context, Routes.loginScreen);

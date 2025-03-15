@@ -1,49 +1,48 @@
+import 'package:chat/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 abstract class AppTextStyle {
-  static TextStyle simiBold68 = TextStyle(
+  static TextStyle simiBoldGrey68 = TextStyle(
     color: Colors.white,
     fontSize: 68.sp,
     fontFamily: 'Caros',
     fontWeight: FontWeight.w600,
-    height: 1.15,
   );
-  static TextStyle regular68 = TextStyle(
+  static TextStyle regularGrey68 = TextStyle(
     color: Colors.white,
     fontSize: 68.sp,
     fontFamily: 'Caros',
     fontWeight: FontWeight.w400,
-    height: 1.15,
   );
-  static TextStyle regular16 = TextStyle(
+  static TextStyle regularGrey16 = TextStyle(
     color: Color(0xFFB9C1BE),
-    fontSize: 16,
-    fontFamily: 'Circular Std',
+    fontSize: 16.sp,
+    fontFamily: AppTheme.fontFamily,
     fontWeight: FontWeight.w400,
-    height: 1.62,
+
   );
-  static TextStyle regular14 = TextStyle(
+  static TextStyle regularGrey14 = TextStyle(
     color: Color(0xFFB8C1BD),
-    fontSize: 14,
-    fontFamily: 'Circular Std',
+    fontSize: 14.sp,
+    fontFamily: AppTheme.fontFamily,
     fontWeight: FontWeight.w400,
-    height: 1,
-    letterSpacing: 0.3,
   );
-  static TextStyle medium14 = TextStyle(
+  static TextStyle mediumWhite14 = TextStyle(
     color: Colors.white,
-    fontSize: 14,
-    fontFamily: 'Circular Std',
+    fontSize: 14.sp,
+    fontFamily: AppTheme.fontFamily,
     fontWeight: FontWeight.w500,
-    height: 1,
-    letterSpacing: 0.10,
   );
-  static TextStyle simiBold18 = TextStyle(
+  static TextStyle simiBoldBlack18 = TextStyle(
     color: Color(0xFF000D07),
-    fontSize: 18,
+    fontSize: 18.sp,
     fontFamily: 'Caros',
     fontWeight: FontWeight.w600,
-    height: 1,
   );
+  static TextStyle simiBoldGray14 = TextStyle(
+                      color: Color(0xFF797C7B),
+                      fontSize: 14.sp,
+                      fontFamily: AppTheme.fontFamily,
+                    );
 }

@@ -13,19 +13,19 @@ class OnboradingTextTitle extends StatelessWidget {
         children: [
           TextSpan(
             text: 'Connect\n',
-            style: AppTextStyle.regular68,
+            style: AppTextStyle.regularGrey68,
           ),
           TextSpan(
             text: 'friends\n',
-            style: AppTextStyle.regular68,
+            style: AppTextStyle.regularGrey68,
           ),
           TextSpan(
             text: 'easily &\n',
-            style: AppTextStyle.simiBold68,
+            style: AppTextStyle.simiBoldGrey68,
           ),
           TextSpan(
             text: 'quickly',
-            style: AppTextStyle.simiBold68,
+            style: AppTextStyle.simiBoldGrey68,
           ),
         ],
       ),
