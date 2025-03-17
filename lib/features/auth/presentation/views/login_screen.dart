@@ -1,35 +1,97 @@
+import 'package:chat/core/routing/routes.dart';
 import 'package:flutter/material.dart';
-import '../../../../core/routing/routes.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:chat/features/auth/presentation/views/widgets/login_form.dart';
+import 'package:chat/features/auth/presentation/views/widgets/login_actions.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  bool _isLoading = false;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _validateAndSubmit() async {
+    final isValid = _formKey.currentState!.validate();
+    if (isValid) {
+      setState(() => _isLoading = true);
+
+      try {
+        // Simulate API call
+        await Future.delayed(const Duration(seconds: 1));
+
+        if (mounted) {
+          print('Form is valid. Logging in...');
+          print('Email: ${_emailController.text}');
+          print('Password: ${_passwordController.text}');
+          // TODO: Add actual login logic and navigation
+        }
+      } catch (e) {
+        print('Error logging in: $e');
+      } finally {
+        if (mounted) {
+          setState(() => _isLoading = false);
+        }
+      }
+    } else {
+      print('Form validation failed. Please check the fields.');
+    }
+  }
+
+  void _onForgotPasswordTap() {
+    // TODO: Navigate to forgot password screen
+    print('Navigate to forgot password');
+  }
+
+  void _onSignUpTap() {
+    Navigator.pushNamed(context, Routes.signupScreen);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('Login Screen'),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () =>
-                  Navigator.pushNamed(context, Routes.signupScreen),
-              child: const Text('Go to Signup'),
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: SingleChildScrollView(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  LoginForm(
+                    formKey: _formKey,
+                    emailController: _emailController,
+                    passwordController: _passwordController,
+                  ),
+                  LoginActions(
+                    isLoading: _isLoading,
+                    onLogin: _validateAndSubmit,
+                    onForgotPassword: _onForgotPasswordTap,
+                    onSignUp: _onSignUpTap,
+                  ),
+                  // Add bottom padding to ensure enough space when scrolled
+                  SizedBox(height: 20.h),
+                ],
+              ),
             ),
-            const SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () => Navigator.pushNamed(context, Routes.homeScreen),
-              child: const Text('Login to Home'),
-            ),
-          ],
+          ),
         ),
       ),
     );

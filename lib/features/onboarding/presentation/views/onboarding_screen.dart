@@ -7,13 +7,22 @@ import 'package:chat/features/onboarding/presentation/views/widgets/onboarding_t
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter/services.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        if (!didPop) {
+          // Exit the app when back button is pressed on onboarding screen
+          SystemNavigator.pop();
+        }
+      },
+      child: Scaffold(
         backgroundColor: Colors.black,
         body: Stack(
           children: [
@@ -92,6 +101,8 @@ class OnBoardingScreen extends StatelessWidget {
               ),
             )
           ],
-        ));
+        ),
+      ),
+    );
   }
 }

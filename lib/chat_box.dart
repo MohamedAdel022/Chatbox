@@ -15,7 +15,6 @@ class ChatBoxAPP extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
               useMaterial3: true,
             ),
             initialRoute: Routes.onBoardingScreen,

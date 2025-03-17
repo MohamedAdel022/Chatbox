@@ -20,13 +20,20 @@ abstract class AppTextStyle {
     fontSize: 16.sp,
     fontFamily: AppTheme.fontFamily,
     fontWeight: FontWeight.w400,
-
   );
   static TextStyle regularGrey14 = TextStyle(
     color: Color(0xFFB8C1BD),
     fontSize: 14.sp,
     fontFamily: AppTheme.fontFamily,
     fontWeight: FontWeight.w400,
+  );
+  static TextStyle regularGreen14 = TextStyle(
+    color: AppTheme.primaryColor,
+    fontSize: 14,
+    fontFamily: 'Circular Std',
+    fontWeight: FontWeight.w500,
+    height: 1,
+    letterSpacing: 0.10,
   );
   static TextStyle mediumWhite14 = TextStyle(
     color: Colors.white,
@@ -41,8 +48,13 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w600,
   );
   static TextStyle simiBoldGray14 = TextStyle(
-                      color: Color(0xFF797C7B),
-                      fontSize: 14.sp,
-                      fontFamily: AppTheme.fontFamily,
-                    );
+    color: Color(0xFF797C7B),
+    fontSize: 14.sp,
+    fontFamily: AppTheme.fontFamily,
+  );
+  static final regularGray14 = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+    color: Colors.grey,
+  );
 }

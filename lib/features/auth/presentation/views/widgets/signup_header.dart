@@ -2,8 +2,10 @@ import 'package:chat/core/theme/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SignupHeader extends StatelessWidget {
-  const SignupHeader({super.key});
+class CustomAuthHeader extends StatelessWidget {
+  const CustomAuthHeader({super.key, required this.title, required this.subtitle});
+  final String title;
+  final String subtitle;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +13,7 @@ class SignupHeader extends StatelessWidget {
       children: [
         Center(
           child: Text(
-            'Sign up with Email',
+            title,
             style: AppTextStyle.simiBoldBlack18,
           ),
         ),
@@ -20,7 +22,7 @@ class SignupHeader extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 80.w),
             child: Text(
-              'Get chatting with friends and family today by signing up for our chat app!',
+              subtitle,
               textAlign: TextAlign.center,
               style: AppTextStyle.simiBoldGray14,
             ),

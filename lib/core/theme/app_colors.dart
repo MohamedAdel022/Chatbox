@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
 
-class Colors {
+class AppColors {
   static const Color green = Color(0xff24786D);
 }
