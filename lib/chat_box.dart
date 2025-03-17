@@ -17,7 +17,7 @@ class ChatBoxAPP extends StatelessWidget {
             theme: ThemeData(
               useMaterial3: true,
             ),
-            initialRoute: Routes.onBoardingScreen,
+            initialRoute: Routes.homeScreen,
             onGenerateRoute: AppRouter.generateRoute,
           );
         });

@@ -38,8 +38,9 @@ class CustomButton extends StatelessWidget {
         foregroundColor: foregroundColor ?? Colors.black,
         backgroundColor: backgroundColor ?? Colors.white,
         minimumSize: Size(width ?? double.infinity, height ?? 50.h),
-        disabledBackgroundColor:
-            backgroundColor?.withOpacity(0.7) ?? Colors.grey[300],
+        disabledBackgroundColor: backgroundColor != null
+            ? backgroundColor?.withValues(alpha: 0.7)
+            : Colors.grey[300],
       ),
       child: isLoading
           ? SizedBox(
