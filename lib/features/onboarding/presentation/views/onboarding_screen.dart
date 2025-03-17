@@ -16,11 +16,12 @@ class OnBoardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
-      onPopInvoked: (didPop) {
+      onPopInvokedWithResult: (didPop, result) {
         if (!didPop) {
           // Exit the app when back button is pressed on onboarding screen
           SystemNavigator.pop();
         }
+        return;
       },
       child: Scaffold(
         backgroundColor: Colors.black,
