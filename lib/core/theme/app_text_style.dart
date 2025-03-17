@@ -52,8 +52,8 @@ abstract class AppTextStyle {
     fontSize: 14.sp,
     fontFamily: AppTheme.fontFamily,
   );
-  static final regularGray14 = TextStyle(
-    fontSize: 14.sp,
+  static TextStyle regularGray10 = TextStyle(
+    fontSize: 10.sp,
     fontWeight: FontWeight.w400,
     color: Colors.grey,
   );

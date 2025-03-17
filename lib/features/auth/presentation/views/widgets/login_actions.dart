@@ -58,7 +58,7 @@ class LoginActions extends StatelessWidget {
         children: [
           Text(
             "Don't have an account?",
-            style: AppTextStyle.regularGray14,
+            style: AppTextStyle.regularGray10,
           ),
           TextButton(
             onPressed: onSignUp,

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomAuthHeader extends StatelessWidget {
-  const CustomAuthHeader({super.key, required this.title, required this.subtitle});
+  const CustomAuthHeader(
+      {super.key, required this.title, required this.subtitle});
   final String title;
   final String subtitle;
 
@@ -20,7 +21,7 @@ class CustomAuthHeader extends StatelessWidget {
         SizedBox(height: 20.h),
         Center(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 80.w),
+            padding: EdgeInsets.symmetric(horizontal: 50.w),
             child: Text(
               subtitle,
               textAlign: TextAlign.center,

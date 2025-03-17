@@ -1,5 +1,6 @@
 import 'package:chat/core/theme/app_text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OnboradingTextTitle extends StatelessWidget {
   const OnboradingTextTitle({
@@ -29,6 +30,8 @@ class OnboradingTextTitle extends StatelessWidget {
           ),
         ],
       ),
+      style: TextStyle(
+          height: 1.3.h), // Reduced line height for more compact spacing
     );
   }
 }

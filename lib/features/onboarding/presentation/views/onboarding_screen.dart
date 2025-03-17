@@ -23,85 +23,88 @@ class OnBoardingScreen extends StatelessWidget {
         }
         return;
       },
-      child: Scaffold(
-        backgroundColor: Colors.black,
-        body: Stack(
-          children: [
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: Image.asset(
-                Assets.imagesEllipse,
-                fit: BoxFit.cover,
+      child: SafeArea(
+        bottom: false,
+        child: Scaffold(
+          backgroundColor: Colors.black,
+          body: Stack(
+            children: [
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: Image.asset(
+                  Assets.imagesEllipse,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 50.h,
-                  ),
-                  LogoImage(),
-                  SizedBox(
-                    height: 50.h,
-                  ),
-                  OnboradingTextTitle(),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(right: 19.w),
-                    child: Text(
-                      textAlign: TextAlign.left,
-                      "Our chat app is the perfect way to stay connected with friends and family.",
-                      style: AppTextStyle.regularGrey16,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 20.h,
                     ),
-                  ),
-                  Spacer(
-                    flex: 5,
-                  ),
-                  CustomButton(
-                    text: 'Get Started',
-                    onPressed: () {
-                      Navigator.pushNamed(context, Routes.signupScreen);
-                    },
-                    backgroundColor: Colors.white,
-                    foregroundColor: Colors.black,
-                    width: double.infinity,
-                    height: 50.h,
-                    borderRadius: 10,
-                  ),
-                  Spacer(
-                    flex: 1,
-                  ),
-                  Center(
-                    child: RichText(
-                        text: TextSpan(children: [
-                      TextSpan(
-                        text: 'Existing account?',
-                        style: AppTextStyle.regularGrey14,
+                    LogoImage(),
+                    SizedBox(
+                      height: 40.h,
+                    ),
+                    OnboradingTextTitle(),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 19.w),
+                      child: Text(
+                        textAlign: TextAlign.left,
+                        "Our chat app is the perfect way to stay connected with friends and family.",
+                        style: AppTextStyle.regularGrey16,
                       ),
-                      TextSpan(
-                        text: ' Log in',
-                        style: AppTextStyle.mediumWhite14,
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.pushNamed(context, Routes.loginScreen);
-                          },
-                      ),
-                    ])),
-                  ),
-                  Spacer(
-                    flex: 2,
-                  )
-                ],
-              ),
-            )
-          ],
+                    ),
+                    Spacer(
+                      flex: 5,
+                    ),
+                    CustomButton(
+                      text: 'Get Started',
+                      onPressed: () {
+                        Navigator.pushNamed(context, Routes.signupScreen);
+                      },
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.black,
+                      width: double.infinity,
+                      height: 50.h,
+                      borderRadius: 10,
+                    ),
+                    Spacer(
+                      flex: 1,
+                    ),
+                    Center(
+                      child: RichText(
+                          text: TextSpan(children: [
+                        TextSpan(
+                          text: 'Existing account?',
+                          style: AppTextStyle.regularGrey14,
+                        ),
+                        TextSpan(
+                          text: ' Log in',
+                          style: AppTextStyle.mediumWhite14,
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.pushNamed(context, Routes.loginScreen);
+                            },
+                        ),
+                      ])),
+                    ),
+                    Spacer(
+                      flex: 2,
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

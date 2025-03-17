@@ -66,29 +66,35 @@ class _LoginScreenState extends State<LoginScreen> {
       onTap: () {
         FocusScope.of(context).unfocus();
       },
-      child: Scaffold(
-        body: SafeArea(
-          child: Padding(
+      child: SafeArea(
+        bottom: false,
+        child: Scaffold(
+          body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: SingleChildScrollView(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  LoginForm(
-                    formKey: _formKey,
-                    emailController: _emailController,
-                    passwordController: _passwordController,
-                  ),
-                  LoginActions(
-                    isLoading: _isLoading,
-                    onLogin: _validateAndSubmit,
-                    onForgotPassword: _onForgotPasswordTap,
-                    onSignUp: _onSignUpTap,
-                  ),
-                  // Add bottom padding to ensure enough space when scrolled
-                  SizedBox(height: 20.h),
-                ],
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height -
+                    MediaQuery.of(context).padding.top, // Account for safe area
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    LoginForm(
+                      formKey: _formKey,
+                      emailController: _emailController,
+                      passwordController: _passwordController,
+                    ),
+                    const Spacer(), // This will push the actions to the bottom
+                    LoginActions(
+                      isLoading: _isLoading,
+                      onLogin: _validateAndSubmit,
+                      onForgotPassword: _onForgotPasswordTap,
+                      onSignUp: _onSignUpTap,
+                    ),
+                    // Add bottom padding to ensure enough space when scrolled
+                    SizedBox(height: 20.h),
+                  ],
+                ),
               ),
             ),
           ),

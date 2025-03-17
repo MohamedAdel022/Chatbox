@@ -50,9 +50,10 @@ class _SignupScreenState extends State<SignupScreen> {
       onTap: () {
         FocusScope.of(context).unfocus();
       },
-      child: Scaffold(
-        body: SafeArea(
-          child: Padding(
+      child: SafeArea(
+        bottom: false,
+        child: Scaffold(
+          body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,7 +134,6 @@ class _SignupScreenState extends State<SignupScreen> {
                     onPressed: _validateAndSubmit,
                   ),
                 ),
-              
               ],
             ),
           ),
