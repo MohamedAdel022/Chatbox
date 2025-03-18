@@ -57,4 +57,10 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w400,
     color: Colors.grey,
   );
+  static TextStyle mediumWhite20 = TextStyle(
+    color: Colors.white,
+    fontSize: 20.sp,
+    fontFamily: 'Caros',
+    fontWeight: FontWeight.w500,
+  );
 }

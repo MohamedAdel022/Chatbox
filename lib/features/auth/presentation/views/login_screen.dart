@@ -1,4 +1,8 @@
+import 'package:chat/core/helper/spacing.dart';
 import 'package:chat/core/routing/routes.dart';
+import 'package:chat/features/auth/presentation/views/widgets/custom_back_button.dart';
+import 'package:chat/features/auth/presentation/views/widgets/signup_header.dart';
+import 'package:chat/features/auth/presentation/views/widgets/social_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:chat/features/auth/presentation/views/widgets/login_form.dart';
@@ -73,28 +77,33 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: SingleChildScrollView(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height -
-                    MediaQuery.of(context).padding.top, // Account for safe area
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    LoginForm(
-                      formKey: _formKey,
-                      emailController: _emailController,
-                      passwordController: _passwordController,
-                    ),
-                    const Spacer(), // This will push the actions to the bottom
-                    LoginActions(
-                      isLoading: _isLoading,
-                      onLogin: _validateAndSubmit,
-                      onForgotPassword: _onForgotPasswordTap,
-                      onSignUp: _onSignUpTap,
-                    ),
-                    // Add bottom padding to ensure enough space when scrolled
-                    SizedBox(height: 20.h),
-                  ],
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 20.h),
+                  const CustomBackButton(),
+                  SizedBox(height: 30.h),
+                  const CustomAuthHeader(
+                    title: 'Log in to Chatbox',
+                    subtitle:
+                        'Welcome back! Sign in using your social account or email to continue us',
+                  ),
+                  SizedBox(height: 20.h),
+                  SocialLogin(),
+                  SizedBox(height: 20.h),
+                  LoginForm(
+                    formKey: _formKey,
+                    emailController: _emailController,
+                    passwordController: _passwordController,
+                  ),
+                  verticalSpace(75),
+                  LoginActions(
+                    isLoading: _isLoading,
+                    onLogin: _validateAndSubmit,
+                    onForgotPassword: _onForgotPasswordTap,
+                    onSignUp: _onSignUpTap,
+                  ),
+                ],
               ),
             ),
           ),

@@ -1,7 +1,6 @@
 import 'package:chat/core/utils/assets.dart/assets.dart';
+import 'package:chat/core/widgets/custom_buble_icon_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 class SocialLogin extends StatelessWidget {
   const SocialLogin({
@@ -13,28 +12,26 @@ class SocialLogin extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        IconButton(
-          icon: SvgPicture.asset(Assets.imagesFacebook),
-          iconSize: 50.w,
+        CustomBubleIconButton(
           onPressed: () {
             // Handle Facebook login
           },
+          icon: Assets.imagesFacebook,
+          pading: 3,
         ),
-        SizedBox(width: 20.w),
-        IconButton(
-          icon: SvgPicture.asset(Assets.imagesGoogle),
-          iconSize: 50.w,
+        CustomBubleIconButton(
           onPressed: () {
             // Handle Google login
           },
+          icon: Assets.imagesGoogle,
+          pading: 3,
         ),
-        SizedBox(width: 20.w),
-        IconButton(
-          icon: SvgPicture.asset(Assets.imagesApple),
-          iconSize: 50.w,
+        CustomBubleIconButton(
           onPressed: () {
-            // Handle Apple login
+            // Handle Twitter login
           },
+          icon: Assets.imagesApple,
+          pading: 3,
         ),
       ],
     );

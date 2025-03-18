@@ -18,7 +18,7 @@ void main() async {
   FlutterNativeSplash.remove();
   runApp(
     DevicePreview(
-      enabled: true, // Enable only in debug mode
+      enabled: true, 
       builder: (context) => const ChatBoxAPP(),
     ),
   );
