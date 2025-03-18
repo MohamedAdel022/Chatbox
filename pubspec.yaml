@@ -38,6 +38,7 @@ dependencies:
   flutter_native_splash: ^2.4.4
   flutter_screenutil: ^5.9.3
   flutter_svg: ^2.0.17
+  iconsax: ^0.0.8
 
 dev_dependencies:
   flutter_lints: ^5.0.0

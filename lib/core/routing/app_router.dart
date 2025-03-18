@@ -1,3 +1,4 @@
+import 'package:chat/features/navigation/presentation/view/bottom_nav_layout.dart';
 import 'package:flutter/material.dart';
 import '../../features/auth/presentation/views/login_screen.dart';
 import '../../features/auth/presentation/views/signup_screen.dart';
@@ -10,12 +11,14 @@ class AppRouter {
     switch (settings.name) {
       case Routes.onBoardingScreen:
         return MaterialPageRoute(builder: (_) => const OnBoardingScreen());
+      case Routes.bottomNavLayout:
+        return MaterialPageRoute(builder: (_) => const BottomNavLayout());
       case Routes.loginScreen:
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case Routes.signupScreen:
         return MaterialPageRoute(builder: (_) => const SignupScreen());
       case Routes.homeScreen:
-        return MaterialPageRoute(builder: (_) =>  HomeScreen());
+        return MaterialPageRoute(builder: (_) => HomeScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

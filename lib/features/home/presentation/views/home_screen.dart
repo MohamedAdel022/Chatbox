@@ -1,5 +1,5 @@
 import 'package:chat/core/helper/spacing.dart';
-import 'package:chat/features/home/presentation/views/widgets/custom_bottom_nav_bar.dart';
+
 import 'package:chat/features/home/presentation/views/widgets/home_header.dart';
 import 'package:flutter/material.dart';
 
@@ -9,30 +9,30 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      bottom: false,
       child: Scaffold(
-        backgroundColor: Colors.black, 
-        bottomNavigationBar: MediaQuery.removePadding(
-          context: context,
-          removeBottom: true,
-          child: CustomBottomNavBar(),
-        ),
+        backgroundColor: Colors.black,
+
         body: Column(
           children: [
             verticalSpace(20),
             HomeHeader(),
+            verticalSpace(50),
             Expanded(
-              child: ListView(
-                children: [
-                  // Add your widgets here
-                ],
+              child: Container(
+                decoration: ShapeDecoration(
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(40),
+                    ),
+                  ),
+                ),
               ),
-            ),
+            )
           ],
         ),
       ),
     );
   }
 }
-
-

@@ -18,7 +18,7 @@ void main() async {
   FlutterNativeSplash.remove();
   runApp(
     DevicePreview(
-      enabled: true, 
+      enabled: false, 
       builder: (context) => const ChatBoxAPP(),
     ),
   );

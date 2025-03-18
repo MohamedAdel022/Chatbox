@@ -15,20 +15,17 @@ class HomeHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           CustomBubleIconButton(
-            onPressed: () {
-              
-            },
+            onPressed: () {},
             icon: Assets.imagesSearch,
             pading: 11,
           ),
           Text(
-            'Home',
+            'Messages',
             style: AppTextStyle.mediumWhite20,
           ),
           CircleAvatar(
             radius: 20.r,
-            backgroundImage: AssetImage(
-                Assets.imagesTest), 
+            backgroundImage: AssetImage(Assets.imagesTest),
           ),
         ],
       ),
