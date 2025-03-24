@@ -22,6 +22,7 @@ class LoginActions extends StatelessWidget {
     return Column(
       children: [
         CustomButton(
+          
           text: 'Log In',
           backgroundColor: AppTheme.primaryColor,
           foregroundColor: Colors.white,

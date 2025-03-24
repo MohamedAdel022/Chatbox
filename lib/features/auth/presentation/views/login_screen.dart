@@ -42,6 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
           print('Email: ${_emailController.text}');
           print('Password: ${_passwordController.text}');
           // TODO: Add actual login logic and navigation
+          Navigator.pushNamed(context, Routes.bottomNavLayout);
         }
       } catch (e) {
         print('Error logging in: $e');

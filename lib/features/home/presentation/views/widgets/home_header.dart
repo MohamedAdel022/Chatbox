@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeHeader extends StatelessWidget {
-  const HomeHeader({super.key});
-
+  const HomeHeader({super.key, required this.title});
+  final String title ;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -20,7 +20,7 @@ class HomeHeader extends StatelessWidget {
             pading: 11,
           ),
           Text(
-            'Messages',
+            title,
             style: AppTextStyle.mediumWhite20,
           ),
           CircleAvatar(

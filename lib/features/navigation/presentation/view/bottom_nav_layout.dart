@@ -1,3 +1,4 @@
+import 'package:chat/features/home/presentation/views/groubs_messages_screen.dart';
 import 'package:chat/features/home/presentation/views/home_screen.dart';
 import 'package:chat/features/navigation/domain/entities/bottom_navigation_entity.dart';
 import 'package:chat/features/navigation/presentation/view/widgets/custom_bottom_nav_bar.dart';
@@ -46,6 +47,8 @@ class _BottomNavLayoutState extends State<BottomNavLayout> {
           ),
         ),
         body: PageView(
+          allowImplicitScrolling: false,
+          padEnds: true,
           controller: _pageController,
           onPageChanged: (index) {
             setState(() {
@@ -56,12 +59,7 @@ class _BottomNavLayoutState extends State<BottomNavLayout> {
             // Home Page
             HomeScreen(),
             // Chats Page
-            Container(
-              color: Colors.white,
-              child: const Center(
-                child: Text('Chats Page', style: TextStyle(fontSize: 24)),
-              ),
-            ),
+            GroubsMessagesScreen(),
             // Profile Page
             Container(
               color: Colors.white,
