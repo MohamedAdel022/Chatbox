@@ -8,11 +8,11 @@ class CustomBackButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.pop(context);
-      },
-      child: SvgPathWidget(assetPath: "assets/images/back_arrow.svg"),
-    );
+    return IconButton(
+        icon: SvgPathWidget(assetPath: "assets/images/back_arrow.svg"),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      );
   }
 }

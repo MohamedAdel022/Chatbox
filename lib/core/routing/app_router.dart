@@ -1,3 +1,4 @@
+import 'package:chat/features/chat/presentation/views/chat_screen.dart';
 import 'package:chat/features/navigation/presentation/view/bottom_nav_layout.dart';
 import 'package:flutter/material.dart';
 import '../../features/auth/presentation/views/login_screen.dart';
@@ -19,6 +20,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const SignupScreen());
       case Routes.homeScreen:
         return MaterialPageRoute(builder: (_) => HomeScreen());
+      case Routes.chatScreen:
+        return MaterialPageRoute(builder: (_) => const ChatScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
