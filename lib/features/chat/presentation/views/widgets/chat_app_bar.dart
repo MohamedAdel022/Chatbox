@@ -1,7 +1,7 @@
 import 'package:chat/core/helper/spacing.dart';
 import 'package:chat/core/theme/app_text_style.dart';
 import 'package:chat/core/utils/assets.dart/assets.dart';
-import 'package:chat/features/auth/presentation/views/widgets/custom_back_button.dart';
+import 'package:chat/core/widgets/custom_back_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

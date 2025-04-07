@@ -1,5 +1,5 @@
 import 'package:chat/core/theme/app_theme.dart';
-import 'package:chat/features/auth/presentation/views/widgets/custom_back_button.dart';
+import 'package:chat/core/widgets/custom_back_button.dart';
 import 'package:chat/features/auth/presentation/views/widgets/custom_text_field.dart';
 import 'package:chat/features/auth/presentation/views/widgets/signup_header.dart';
 import 'package:chat/core/widgets/custom_button.dart';

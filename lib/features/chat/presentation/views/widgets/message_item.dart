@@ -1,3 +1,4 @@
+import 'package:chat/core/helper/spacing.dart';
 import 'package:chat/core/theme/app_text_style.dart';
 import 'package:chat/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,8 @@ class MessageItem extends StatelessWidget {
           children: [
             Container(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              constraints: BoxConstraints(
+                  maxWidth: MediaQuery.of(context).size.width * 0.4),
               decoration: BoxDecoration(
                 color: isSender ? AppTheme.secondaryColor : Color(0xffF2F7FB),
                 borderRadius: BorderRadius.only(
@@ -36,15 +39,12 @@ class MessageItem extends StatelessWidget {
               ),
               child: Text(
                 message,
-                style: TextStyle(
+                style: AppTextStyle.regularGrey12.copyWith(
                   color: isSender ? Colors.white : Colors.black,
-                  fontSize: 12,
-                  fontFamily: 'Circular Std',
-                  fontWeight: FontWeight.w400,
                 ),
               ),
             ),
-            SizedBox(height: 4),
+            verticalSpace(4),
             Text(
               time,
               style: AppTextStyle.regularGray10,

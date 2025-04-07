@@ -20,7 +20,7 @@ class ChatBoxAPP extends StatelessWidget {
                   ColorScheme.fromSeed(seedColor: AppTheme.primaryColor),
               useMaterial3: true,
             ),
-            initialRoute: Routes.chatScreen,
+            initialRoute: Routes.bottomNavLayout,
             onGenerateRoute: AppRouter.generateRoute,
           );
         });

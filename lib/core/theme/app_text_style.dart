@@ -51,6 +51,7 @@ abstract class AppTextStyle {
     color: Color(0xFF797C7B),
     fontSize: 14.sp,
     fontFamily: AppTheme.fontFamily,
+    fontWeight: FontWeight.w600,
   );
   static TextStyle regularGray10 = TextStyle(
     fontSize: 10.sp,
@@ -72,14 +73,20 @@ abstract class AppTextStyle {
   );
   static TextStyle regularGrey12 = TextStyle(
     color: const Color(0xFF797C7B),
-    fontSize: 12,
+    fontSize: 12.sp,
     fontFamily: 'Circular Std',
     fontWeight: FontWeight.w400,
   );
   static TextStyle mediumGrey12 = TextStyle(
     color: const Color(0xFF797C7B),
-    fontSize: 12,
+    fontSize: 12.sp,
     fontFamily: 'Circular Std',
+    fontWeight: FontWeight.w500,
+  );
+  static TextStyle mediumBlack14 = TextStyle(
+    color: const Color(0xFF000D07),
+    fontSize: 14,
+    fontFamily: 'Caros',
     fontWeight: FontWeight.w500,
   );
 }

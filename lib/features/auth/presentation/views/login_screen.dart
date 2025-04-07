@@ -1,6 +1,6 @@
 import 'package:chat/core/helper/spacing.dart';
 import 'package:chat/core/routing/routes.dart';
-import 'package:chat/features/auth/presentation/views/widgets/custom_back_button.dart';
+import 'package:chat/core/widgets/custom_back_button.dart';
 import 'package:chat/features/auth/presentation/views/widgets/signup_header.dart';
 import 'package:chat/features/auth/presentation/views/widgets/social_login.dart';
 import 'package:flutter/material.dart';

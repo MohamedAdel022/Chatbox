@@ -11,6 +11,12 @@ class GroubsMessagesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.white,
+          onPressed: () {},
+          child: Icon(Icons.add),
+        ),
+        floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
         backgroundColor: Colors.black,
         body: Column(
           children: [

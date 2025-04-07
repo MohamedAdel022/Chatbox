@@ -1,3 +1,4 @@
+import 'package:chat/core/utils/assets.dart/assets.dart';
 import 'package:chat/core/widgets/svg_path_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -9,10 +10,10 @@ class CustomBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-        icon: SvgPathWidget(assetPath: "assets/images/back_arrow.svg"),
-        onPressed: () {
-          Navigator.pop(context);
-        },
-      );
+      icon: Center(child: SvgPathWidget(assetPath: Assets.imagesBackArrow)),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
   }
 }
