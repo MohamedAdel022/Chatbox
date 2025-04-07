@@ -5,7 +5,9 @@ import 'package:chat/features/home/presentation/views/widgets/home_header.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final ScrollController? scrollController;
+
+  const HomeScreen({super.key, this.scrollController});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,9 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Expanded(
-                      child: ConversatoinListView(),
+                      child: ConversatoinListView(
+                        scrollController: scrollController,
+                      ),
                     ),
                   ],
                 ),

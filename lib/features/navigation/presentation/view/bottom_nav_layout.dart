@@ -1,3 +1,4 @@
+import 'package:chat/core/helper/scroll_to_hide_controller.dart';
 import 'package:chat/features/home/presentation/views/groubs_messages_screen.dart';
 import 'package:chat/features/home/presentation/views/home_screen.dart';
 import 'package:chat/features/navigation/domain/entities/bottom_navigation_entity.dart';
@@ -14,10 +15,19 @@ class BottomNavLayout extends StatefulWidget {
 class _BottomNavLayoutState extends State<BottomNavLayout> {
   int _currentIndex = 0;
   final PageController _pageController = PageController();
+  late final ScrollToHideController _hideController;
+
+  @override
+  void initState() {
+    super.initState();
+    _hideController = ScrollToHideController();
+    _hideController.init();
+  }
 
   @override
   void dispose() {
     _pageController.dispose();
+    _hideController.dispose();
     super.dispose();
   }
 
@@ -36,15 +46,29 @@ class _BottomNavLayoutState extends State<BottomNavLayout> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: MediaQuery.removePadding(
-          context: context,
-          removeBottom: true,
-          removeTop: true,
-          child: CustomBottomNavBar(
-            currentIndex: _currentIndex,
-            onTap: _onTabTapped,
-            navigationItems: getBottomNavigationItems(),
-          ),
+        bottomNavigationBar: ValueListenableBuilder<bool>(
+          valueListenable: _hideController.isVisible,
+          builder: (context, isVisible, child) {
+            return AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              height: isVisible ? kBottomNavigationBarHeight + 30 : 0,
+              child: Wrap(
+                children: [
+                  if (isVisible)
+                    MediaQuery.removePadding(
+                      context: context,
+                      removeBottom: true,
+                      removeTop: true,
+                      child: CustomBottomNavBar(
+                        currentIndex: _currentIndex,
+                        onTap: _onTabTapped,
+                        navigationItems: getBottomNavigationItems(),
+                      ),
+                    ),
+                ],
+              ),
+            );
+          },
         ),
         body: PageView(
           allowImplicitScrolling: false,
@@ -57,19 +81,21 @@ class _BottomNavLayoutState extends State<BottomNavLayout> {
           },
           children: [
             // Home Page
-            HomeScreen(),
+            HomeScreen(scrollController: _hideController.controller),
             // Chats Page
-            GroubsMessagesScreen(),
+            GroubsMessagesScreen(
+                key: ValueKey(_currentIndex == 1),
+                scrollController: _hideController.controller),
             // Profile Page
             Container(
-              color: Colors.white,
+              color: Colors.red,
               child: const Center(
                 child: Text('Profile Page', style: TextStyle(fontSize: 24)),
               ),
             ),
             // Settings Page
             Container(
-              color: Colors.white,
+              color: Colors.green,
               child: const Center(
                 child: Text('Settings Page', style: TextStyle(fontSize: 24)),
               ),

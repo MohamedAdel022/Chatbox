@@ -4,17 +4,57 @@ import 'package:chat/features/home/presentation/views/widgets/conversation_list_
 import 'package:chat/features/home/presentation/views/widgets/home_header.dart';
 import 'package:flutter/material.dart';
 
-class GroubsMessagesScreen extends StatelessWidget {
-  const GroubsMessagesScreen({super.key});
+class GroubsMessagesScreen extends StatefulWidget {
+  final ScrollController? scrollController;
+
+  const GroubsMessagesScreen({super.key, this.scrollController});
+
+  @override
+  State<GroubsMessagesScreen> createState() => _GroubsMessagesScreenState();
+}
+
+class _GroubsMessagesScreenState extends State<GroubsMessagesScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 600),
+    );
+    _scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeInOut,
+        reverseCurve: Curves.easeInOut.flipped,
+      ),
+    );
+    // Start the animation when the widget is built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _animationController.forward();
+    });
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.white,
-          onPressed: () {},
-          child: Icon(Icons.add),
+        floatingActionButton: ScaleTransition(
+          scale: _scaleAnimation,
+          child: FloatingActionButton(
+            backgroundColor: Colors.white,
+            onPressed: () {},
+            child: Icon(Icons.add),
+          ),
         ),
         floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
         backgroundColor: Colors.black,
@@ -30,7 +70,9 @@ class GroubsMessagesScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Expanded(
-                      child: ConversatoinListView(),
+                      child: ConversatoinListView(
+                        scrollController: widget.scrollController,
+                      ),
                     ),
                   ],
                 ),
