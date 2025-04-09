@@ -1,4 +1,5 @@
 import 'package:chat/core/helper/spacing.dart';
+import 'package:chat/core/theme/app_theme.dart';
 import 'package:chat/core/widgets/background_container.dart';
 import 'package:chat/features/home/presentation/views/widgets/conversation_list_view.dart';
 import 'package:chat/features/home/presentation/views/widgets/home_header.dart';
@@ -34,7 +35,9 @@ class _GroubsMessagesScreenState extends State<GroubsMessagesScreen>
     );
     // Start the animation when the widget is built
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _animationController.forward();
+      if (mounted) {
+        _animationController.forward();
+      }
     });
   }
 
@@ -53,7 +56,10 @@ class _GroubsMessagesScreenState extends State<GroubsMessagesScreen>
           child: FloatingActionButton(
             backgroundColor: Colors.white,
             onPressed: () {},
-            child: Icon(Icons.add),
+            child: Icon(
+              Icons.add,
+              color: AppTheme.primaryColor,
+            ),
           ),
         ),
         floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,

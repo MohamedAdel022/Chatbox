@@ -1,6 +1,7 @@
 import 'package:chat/core/helper/scroll_to_hide_controller.dart';
+import 'package:chat/features/contacts/presentation/views/contacts_screen.dart';
 import 'package:chat/features/home/presentation/views/groubs_messages_screen.dart';
-import 'package:chat/features/home/presentation/views/home_screen.dart';
+import 'package:chat/features/home/presentation/views/messages_screen.dart';
 import 'package:chat/features/navigation/domain/entities/bottom_navigation_entity.dart';
 import 'package:chat/features/navigation/presentation/view/widgets/custom_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
@@ -81,17 +82,14 @@ class _BottomNavLayoutState extends State<BottomNavLayout> {
           },
           children: [
             // Home Page
-            HomeScreen(scrollController: _hideController.controller),
+            MessagesScreen(scrollController: _hideController.controller),
             // Chats Page
             GroubsMessagesScreen(
                 key: ValueKey(_currentIndex == 1),
                 scrollController: _hideController.controller),
             // Profile Page
-            Container(
-              color: Colors.red,
-              child: const Center(
-                child: Text('Profile Page', style: TextStyle(fontSize: 24)),
-              ),
+            ContactsScreen(
+              scrollController: _hideController.controller,
             ),
             // Settings Page
             Container(

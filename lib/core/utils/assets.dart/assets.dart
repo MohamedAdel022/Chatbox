@@ -70,4 +70,6 @@ class Assets {
   /// Assets for backArrow
   /// assets/images/back_arrow.svg
   static const String imagesBackArrow = "assets/images/back_arrow.svg";
+  /// Assets for add user
+  static const String imagesAddUser = "assets/images/user-add.svg";
 }

@@ -4,7 +4,7 @@ import 'package:chat/features/navigation/presentation/view/bottom_nav_layout.dar
 import 'package:flutter/material.dart';
 import '../../features/auth/presentation/views/login_screen.dart';
 import '../../features/auth/presentation/views/signup_screen.dart';
-import '../../features/home/presentation/views/home_screen.dart';
+import '../../features/home/presentation/views/messages_screen.dart';
 import '../../features/onboarding/presentation/views/onboarding_screen.dart';
 import 'routes.dart';
 
@@ -20,7 +20,7 @@ class AppRouter {
       case Routes.signupScreen:
         return MaterialPageRoute(builder: (_) => const SignupScreen());
       case Routes.homeScreen:
-        return MaterialPageRoute(builder: (_) => HomeScreen());
+        return MaterialPageRoute(builder: (_) => const MessagesScreen());
       case Routes.chatScreen:
         return MaterialPageRoute(builder: (_) => const ChatScreen());
       case Routes.groupChatScreen:
