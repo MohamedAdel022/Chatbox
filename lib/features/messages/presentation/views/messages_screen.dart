@@ -1,7 +1,7 @@
 import 'package:chat/core/helper/spacing.dart';
 import 'package:chat/core/widgets/background_container.dart';
-import 'package:chat/features/home/presentation/views/widgets/conversation_list_view.dart';
-import 'package:chat/features/home/presentation/views/widgets/home_header.dart';
+import 'package:chat/features/messages/presentation/views/widgets/conversation_list_view.dart';
+import 'package:chat/features/messages/presentation/views/widgets/home_header.dart';
 import 'package:flutter/material.dart';
 
 class MessagesScreen extends StatelessWidget {

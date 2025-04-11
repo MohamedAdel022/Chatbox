@@ -11,6 +11,7 @@ class ConversationItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      contentPadding: EdgeInsets.zero,
       leading: CircleAvatar(
         radius: 28.r,
         backgroundImage: AssetImage(Assets.imagesTest),

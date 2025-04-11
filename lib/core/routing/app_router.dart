@@ -4,7 +4,7 @@ import 'package:chat/features/navigation/presentation/view/bottom_nav_layout.dar
 import 'package:flutter/material.dart';
 import '../../features/auth/presentation/views/login_screen.dart';
 import '../../features/auth/presentation/views/signup_screen.dart';
-import '../../features/home/presentation/views/messages_screen.dart';
+import '../../features/messages/presentation/views/messages_screen.dart';
 import '../../features/onboarding/presentation/views/onboarding_screen.dart';
 import 'routes.dart';
 

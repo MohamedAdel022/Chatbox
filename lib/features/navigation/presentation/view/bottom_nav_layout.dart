@@ -1,7 +1,7 @@
 import 'package:chat/core/helper/scroll_to_hide_controller.dart';
 import 'package:chat/features/contacts/presentation/views/contacts_screen.dart';
-import 'package:chat/features/home/presentation/views/groubs_messages_screen.dart';
-import 'package:chat/features/home/presentation/views/messages_screen.dart';
+import 'package:chat/features/messages/presentation/views/groubs_messages_screen.dart';
+import 'package:chat/features/messages/presentation/views/messages_screen.dart';
 import 'package:chat/features/navigation/domain/entities/bottom_navigation_entity.dart';
 import 'package:chat/features/navigation/presentation/view/widgets/custom_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
