@@ -24,4 +24,25 @@ class FirebaseAuthService {
       throw CustomException('An unknown error occurred.');
     }
   }
+
+  Future<User> signInWithEmailAndPassword(
+      {required String email, required String password}) async {
+    try {
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return credential.user!;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        throw CustomException('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        throw CustomException('Wrong password provided for that user.');
+      } else {
+        throw CustomException('An unknown error occurred.');
+      }
+    } catch (e) {
+      throw CustomException('An unknown error occurred.');
+    }
+  }
 }

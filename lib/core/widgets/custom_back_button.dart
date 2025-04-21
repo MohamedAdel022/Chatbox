@@ -10,6 +10,7 @@ class CustomBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
+      
       icon: Center(child: SvgPathWidget(assetPath: Assets.imagesBackArrow)),
       onPressed: () {
         Navigator.pop(context);

@@ -1,7 +1,11 @@
+import 'package:chat/core/di/get_it.dart';
+import 'package:chat/features/auth/domin/repos/auth_repo.dart';
+import 'package:chat/features/auth/presentation/cubits/signup_cubit/signup_cubit.dart';
 import 'package:chat/features/chat/presentation/views/chat_screen.dart';
 import 'package:chat/features/chat/presentation/views/group_chat_screen.dart';
 import 'package:chat/features/navigation/presentation/view/bottom_nav_layout.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/auth/presentation/views/login_screen.dart';
 import '../../features/auth/presentation/views/signup_screen.dart';
 import '../../features/messages/presentation/views/messages_screen.dart';
@@ -18,7 +22,11 @@ class AppRouter {
       case Routes.loginScreen:
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case Routes.signupScreen:
-        return MaterialPageRoute(builder: (_) => const SignupScreen());
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => SignupCubit( getIt<AuthRepo>()),
+                  child: const SignupScreen(),
+                ));
       case Routes.homeScreen:
         return MaterialPageRoute(builder: (_) => const MessagesScreen());
       case Routes.chatScreen:
