@@ -1,8 +1,13 @@
 import 'package:chat/core/helper/spacing.dart';
+import 'package:chat/core/theme/app_theme.dart';
 import 'package:chat/core/widgets/background_container.dart';
+import 'package:chat/features/messages/presentation/manager/chat_cubit/chat_cubit.dart';
 import 'package:chat/features/messages/presentation/views/widgets/conversation_list_view.dart';
+import 'package:chat/features/messages/presentation/views/widgets/create_new_chat_bottom_sheet.dart';
 import 'package:chat/features/messages/presentation/views/widgets/home_header.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iconsax/iconsax.dart';
 
 class MessagesScreen extends StatelessWidget {
   final ScrollController? scrollController;
@@ -12,29 +17,56 @@ class MessagesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.black,
-        body: Column(
-          children: [
-            verticalSpace(20),
-            HomeHeader(
-              title: "Chats",
-            ),
-            verticalSpace(50),
-            Expanded(
-              child: BackgroundContainer(
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: ConversatoinListView(
-                        scrollController: scrollController,
-                      ),
-                    ),
-                  ],
-                ),
+      child: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Scaffold(
+          floatingActionButton: Builder(builder: (context) {
+            return FloatingActionButton(
+              backgroundColor: Colors.white,
+              onPressed: () {
+                final chatCubit = BlocProvider.of<ChatCubit>(context);
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  builder: (bottomSheetContext) {
+                    return BlocProvider.value(
+                      value: chatCubit,
+                      child: const CreateChatBottomSheet(),
+                    );
+                  },
+                );
+              },
+              child: const Icon(
+                Iconsax.message_add,
+                color: AppTheme.primaryColor,
               ),
-            )
-          ],
+            );
+          }),
+          backgroundColor: Colors.black,
+          body: Column(
+            children: [
+              verticalSpace(20),
+              HomeHeader(
+                title: "Chats",
+              ),
+              verticalSpace(50),
+              Expanded(
+                child: BackgroundContainer(
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: ConversatoinListView(
+                          scrollController: scrollController,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

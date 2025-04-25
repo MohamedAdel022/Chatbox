@@ -14,4 +14,8 @@ abstract class AuthRepo {
     required String password,
   });
 
+  Future addUserToFirestore(UserEntity user);
+
+  Future<UserEntity> getUserFromFirestore(String docId);
+
 }

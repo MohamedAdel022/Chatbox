@@ -53,10 +53,11 @@ class _SignupScreenState extends State<SignupScreen> {
     return BlocListener<SignupCubit, SignupState>(
       listener: (context, state) {
         if (state is SignupSuccess) {
-          showCustomSnackBar(context, 'Account created successfully!',
+          showCustomSnackBar(context,
+              'Account created successfully! Please check your email to verify your account.',
               color: Colors.green);
-          // Navigate to the next screen after successful signup
-          Navigator.pushReplacementNamed(context, Routes.bottomNavLayout);
+          // Navigate to login screen after successful signup
+          Navigator.pushReplacementNamed(context, Routes.loginScreen);
         } else if (state is SignupFailure) {
           showCustomSnackBar(context, state.error, color: Colors.red);
         }

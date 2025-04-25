@@ -1,3 +1,4 @@
+import 'package:chat/core/helper/app_regx.dart';
 import 'package:chat/features/auth/presentation/views/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,8 +19,8 @@ class LoginForm extends StatelessWidget {
     if (value == null || value.isEmpty) {
       return 'Email is required';
     }
-    final emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-    if (!emailRegExp.hasMatch(value)) {
+    
+    if (!AppRegx.isEmailValid(value)) {
       return 'Please enter a valid email';
     }
     return null;
