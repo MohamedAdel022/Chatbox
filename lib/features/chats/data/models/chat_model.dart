@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:chat/features/messages/domain/entities/chat_entity.dart';
+import 'package:chat/features/chats/domain/entities/chat_entity.dart';
+import 'package:chat/features/auth/domin/entities/user_entity.dart';
 
 class ChatModel extends ChatEntity {
   ChatModel({
     required super.id,
     required super.participants,
+    super.otherUserInfo,
     required super.lastMessage,
     required super.lastMessageTime,
     required super.lastSenderId,
@@ -12,10 +14,11 @@ class ChatModel extends ChatEntity {
     required super.createdAt,
   });
 
-  factory ChatModel.fromJson(Map<String, dynamic> json) {
+  factory ChatModel.fromJson(Map<String, dynamic> json, {UserEntity? otherUser}) {
     return ChatModel(
       id: json['id'],
       participants: List<String>.from(json['participants']),
+      otherUserInfo: otherUser, // Pass the other user info directly
       lastMessage: json['lastMessage'],
       lastMessageTime: json['lastMessageTime'] is Timestamp
           ? (json['lastMessageTime'] as Timestamp).toDate().toIso8601String()
@@ -42,6 +45,7 @@ class ChatModel extends ChatEntity {
     return ChatModel(
       id: '',
       participants: [],
+      otherUserInfo: null, // No user info for empty model
       lastMessage: '',
       lastMessageTime: DateTime.now().toIso8601String(),
       lastSenderId: '',

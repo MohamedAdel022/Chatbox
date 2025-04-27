@@ -1,7 +1,7 @@
-import 'package:chat/features/messages/domain/entities/chat_entity.dart';
+import 'package:chat/features/chats/domain/entities/chat_entity.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class ChatState extends Equatable {
+sealed class ChatState extends Equatable {
   const ChatState();
 
   @override

@@ -1,6 +1,6 @@
-import 'package:chat/features/messages/presentation/manager/chat_cubit/chat_cubit.dart';
-import 'package:chat/features/messages/presentation/manager/chat_cubit/chat_state.dart';
-import 'package:chat/features/messages/presentation/views/widgets/create_new_chat_form.dart';
+import 'package:chat/features/chats/presentation/manager/chat_cubit/chat_cubit.dart';
+import 'package:chat/features/chats/presentation/manager/chat_cubit/chat_state.dart';
+import 'package:chat/features/chats/presentation/views/widgets/create_new_chat_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';

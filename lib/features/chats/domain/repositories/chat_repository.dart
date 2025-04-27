@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:chat/core/errors/failures.dart';
-import 'package:chat/features/messages/domain/entities/chat_entity.dart';
+import 'package:chat/features/chats/domain/entities/chat_entity.dart';
 
 abstract class ChatRepository {
   // Chat methods
@@ -10,4 +10,7 @@ abstract class ChatRepository {
   // Stream methods
   Stream<List<ChatEntity>> chatsStream(String userId);
   Future<String> getCurrentUserId();
+  
+
 }
+

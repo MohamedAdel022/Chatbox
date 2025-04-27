@@ -1,4 +1,4 @@
-import 'package:chat/features/chat/presentation/views/widgets/group_messages_item.dart';
+import 'package:chat/features/messages/presentation/views/widgets/group_messages_item.dart';
 import 'package:flutter/material.dart';
 
 class GroupMessagesListView extends StatelessWidget {

@@ -1,6 +1,6 @@
-import 'package:chat/features/chat/presentation/views/widgets/chat_app_bar.dart';
-import 'package:chat/features/chat/presentation/views/widgets/chat_text_field.dart';
-import 'package:chat/features/chat/presentation/views/widgets/group_messages_list_view.dart';
+
+import 'package:chat/features/messages/presentation/views/widgets/chat_text_field.dart';
+import 'package:chat/features/messages/presentation/views/widgets/group_messages_list_view.dart';
 import 'package:flutter/material.dart';
 
 class GroupChatScreen extends StatelessWidget {
@@ -10,7 +10,7 @@ class GroupChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: ChatAppBar(),
+      // appBar: ChatAppBar(),
       body: Column(
         children: [
           Expanded(

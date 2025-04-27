@@ -1,18 +1,18 @@
 import 'package:chat/core/helper/spacing.dart';
 import 'package:chat/core/theme/app_theme.dart';
 import 'package:chat/core/widgets/background_container.dart';
-import 'package:chat/features/messages/presentation/manager/chat_cubit/chat_cubit.dart';
-import 'package:chat/features/messages/presentation/views/widgets/conversation_list_view.dart';
-import 'package:chat/features/messages/presentation/views/widgets/create_new_chat_bottom_sheet.dart';
-import 'package:chat/features/messages/presentation/views/widgets/home_header.dart';
+import 'package:chat/features/chats/presentation/manager/chat_cubit/chat_cubit.dart';
+import 'package:chat/features/chats/presentation/views/widgets/conversation_list_view.dart';
+import 'package:chat/features/chats/presentation/views/widgets/create_new_chat_bottom_sheet.dart';
+import 'package:chat/features/chats/presentation/views/widgets/home_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 
-class MessagesScreen extends StatelessWidget {
+class ChatsScreen extends StatelessWidget {
   final ScrollController? scrollController;
 
-  const MessagesScreen({super.key, this.scrollController});
+  const ChatsScreen({super.key, this.scrollController});
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +57,7 @@ class MessagesScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Expanded(
-                        child: ConversatoinListView(
+                        child: ConversationListView(
                           scrollController: scrollController,
                         ),
                       ),

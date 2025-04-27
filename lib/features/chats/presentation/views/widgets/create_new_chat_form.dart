@@ -1,8 +1,8 @@
 import 'package:chat/core/helper/app_regx.dart';
 import 'package:chat/core/helper/spacing.dart';
 import 'package:chat/core/theme/app_theme.dart';
-import 'package:chat/features/messages/presentation/manager/chat_cubit/chat_cubit.dart';
-import 'package:chat/features/messages/presentation/manager/chat_cubit/chat_state.dart';
+import 'package:chat/features/chats/presentation/manager/chat_cubit/chat_cubit.dart';
+import 'package:chat/features/chats/presentation/manager/chat_cubit/chat_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';

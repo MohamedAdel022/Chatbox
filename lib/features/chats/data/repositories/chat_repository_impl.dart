@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:chat/core/errors/failures.dart';
-import 'package:chat/features/messages/data/models/chat_model.dart';
-import 'package:chat/features/messages/domain/entities/chat_entity.dart';
-import 'package:chat/features/messages/domain/repositories/message_repository.dart';
+import 'package:chat/features/auth/data/models/user_model.dart';
+import 'package:chat/features/auth/domin/entities/user_entity.dart';
+import 'package:chat/features/chats/data/models/chat_model.dart';
+import 'package:chat/features/chats/domain/entities/chat_entity.dart';
+import 'package:chat/features/chats/domain/repositories/chat_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,9 +22,16 @@ class ChatRepositoryImpl implements ChatRepository {
       final query = chatsRef.where('participants', arrayContains: userId);
 
       final snapshot = await query.get();
-      final chats = snapshot.docs
-          .map((doc) => ChatModel.fromJson({...doc.data(), 'id': doc.id}))
-          .toList();
+      final chats = <ChatEntity>[];
+
+      for (var doc in snapshot.docs) {
+        final chatData = {...doc.data(), 'id': doc.id};
+        final otherUserId =
+            _getOtherParticipantId(chatData['participants'], userId);
+        final otherUser = await _fetchUserInfo(otherUserId);
+
+        chats.add(ChatModel.fromJson(chatData, otherUser: otherUser));
+      }
 
       return Right(chats);
     } catch (e) {
@@ -28,11 +39,34 @@ class ChatRepositoryImpl implements ChatRepository {
     }
   }
 
+  String _getOtherParticipantId(
+      List<dynamic> participants, String currentUserId) {
+    return participants.firstWhere(
+      (id) => id != currentUserId,
+      orElse: () => participants.isNotEmpty ? participants.first : '',
+    );
+  }
+
+  Future<UserEntity?> _fetchUserInfo(String userId) async {
+    try {
+      final userDoc = await firestore.collection('users').doc(userId).get();
+      if (userDoc.exists) {
+        final userData = {...userDoc.data()!};
+        return UserModel.fromJson(userData);
+      }
+      return null;
+    } catch (e) {
+      log('Error fetching user info: $e');
+      return null;
+    }
+  }
+
   @override
   Future<Either<Failure, String>> createChat(String email) async {
-    final query = firestore.collection('users').where('email', isEqualTo: email);
+    final query =
+        firestore.collection('users').where('email', isEqualTo: email);
     final snapshot = await query.get();
-    
+
     if (snapshot.docs.isEmpty) {
       return Left(ServerFailure('User not found'));
     }
@@ -57,8 +91,6 @@ class ChatRepositoryImpl implements ChatRepository {
     return Right(chatData.id);
   }
 
-  
-
   @override
   Stream<List<ChatEntity>> chatsStream(String userId) {
     return firestore
@@ -66,11 +98,22 @@ class ChatRepositoryImpl implements ChatRepository {
         .where('participants', arrayContains: userId)
         .orderBy('lastMessageTime', descending: true)
         .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((doc) => ChatModel.fromJson({...doc.data(), 'id': doc.id}))
-            .toList());
+        .asyncMap((snapshot) async {
+      final chats = <ChatEntity>[];
+
+      for (var doc in snapshot.docs) {
+        final chatData = {...doc.data(), 'id': doc.id};
+        final otherUserId =
+            _getOtherParticipantId(chatData['participants'], userId);
+        final otherUser = await _fetchUserInfo(otherUserId);
+
+        chats.add(ChatModel.fromJson(chatData, otherUser: otherUser));
+      }
+
+      return chats;
+    });
   }
-  
+
   @override
   Future<String> getCurrentUserId() async {
     final user = FirebaseAuth.instance.currentUser;
@@ -79,6 +122,4 @@ class ChatRepositoryImpl implements ChatRepository {
     }
     return user.uid;
   }
-
-  
 }

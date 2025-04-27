@@ -1,14 +1,10 @@
 import 'package:chat/core/helper/scroll_to_hide_controller.dart';
+import 'package:chat/features/chats/presentation/views/chats_Screen.dart';
+import 'package:chat/features/chats/presentation/views/group_chats_screen.dart';
 import 'package:chat/features/contacts/presentation/views/contacts_screen.dart';
-import 'package:chat/features/messages/presentation/views/groubs_messages_screen.dart';
-import 'package:chat/features/messages/presentation/views/messages_screen.dart';
 import 'package:chat/features/navigation/domain/entities/bottom_navigation_entity.dart';
 import 'package:chat/features/navigation/presentation/view/widgets/custom_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:chat/features/messages/presentation/manager/chat_cubit/chat_cubit.dart';
-import 'package:chat/core/di/get_it.dart';
-import 'package:chat/features/messages/domain/repositories/message_repository.dart';
 
 class BottomNavLayout extends StatefulWidget {
   const BottomNavLayout({super.key});
@@ -86,14 +82,9 @@ class _BottomNavLayoutState extends State<BottomNavLayout> {
           },
           children: [
             // Home Page
-            BlocProvider(
-              create: (context) =>
-                  ChatCubit(messageRepository: getIt<ChatRepository>()),
-              child:
-                  MessagesScreen(scrollController: _hideController.controller),
-            ),
+            ChatsScreen(scrollController: _hideController.controller),
             // Chats Page
-            GroubsMessagesScreen(
+            GroupsChatsScreen(
                 key: ValueKey(_currentIndex == 1),
                 scrollController: _hideController.controller),
             // Profile Page

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:chat/features/chat/presentation/views/widgets/message_item.dart';
+import 'package:chat/features/messages/presentation/views/widgets/message_item.dart';
 
 class MessagesListView extends StatelessWidget {
   const MessagesListView({super.key});
