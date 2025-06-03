@@ -25,7 +25,7 @@ class SignUpForm extends StatelessWidget {
   final TextEditingController _emailController;
   final TextEditingController _passwordController;
   final TextEditingController _confirmPasswordController;
-  final AutovalidateMode _autovalidateMode ;
+  final AutovalidateMode _autovalidateMode;
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +37,7 @@ class SignUpForm extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(height: 20.h),
-          IntrinsicWidth(
-            child: const CustomBackButton(),
-          ),
+          const CustomBackButton(),
           SizedBox(height: 50.h),
           const CustomAuthHeader(
             title: 'Sign up with Email',

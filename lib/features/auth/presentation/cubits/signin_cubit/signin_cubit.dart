@@ -7,7 +7,7 @@ part 'signin_state.dart';
 
 class SigninCubit extends Cubit<SigninState> {
   SigninCubit(this.authRepo) : super(SigninInitial());
-final AuthRepo authRepo;
+  final AuthRepo authRepo;
 
   Future<void> signInWithEmailAndPassword({
     required String email,
@@ -23,5 +23,4 @@ final AuthRepo authRepo;
       (userEntity) => emit(SigninSuccess(userEntity)),
     );
   }
-  
 }

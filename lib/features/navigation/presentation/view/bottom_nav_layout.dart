@@ -1,9 +1,7 @@
 import 'package:chat/core/helper/scroll_to_hide_controller.dart';
-import 'package:chat/features/chats/presentation/views/chats_Screen.dart';
-import 'package:chat/features/chats/presentation/views/group_chats_screen.dart';
-import 'package:chat/features/contacts/presentation/views/contacts_screen.dart';
 import 'package:chat/features/navigation/domain/entities/bottom_navigation_entity.dart';
 import 'package:chat/features/navigation/presentation/view/widgets/custom_bottom_nav_bar.dart';
+import 'package:chat/features/navigation/presentation/view/widgets/nav_page_view.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavLayout extends StatefulWidget {
@@ -15,7 +13,7 @@ class BottomNavLayout extends StatefulWidget {
 
 class _BottomNavLayoutState extends State<BottomNavLayout> {
   int _currentIndex = 0;
-  final PageController _pageController = PageController();
+  final PageController _pageController = PageController(keepPage: true);
   late final ScrollToHideController _hideController;
 
   @override
@@ -71,34 +69,15 @@ class _BottomNavLayoutState extends State<BottomNavLayout> {
             );
           },
         ),
-        body: PageView(
-          allowImplicitScrolling: false,
-          padEnds: true,
-          controller: _pageController,
+        body: NavPageView(
+          currentIndex: _currentIndex,
+          pageController: _pageController,
+          scrollController: _hideController.controller,
           onPageChanged: (index) {
             setState(() {
               _currentIndex = index;
             });
           },
-          children: [
-            // Home Page
-            ChatsScreen(scrollController: _hideController.controller),
-            // Chats Page
-            GroupsChatsScreen(
-                key: ValueKey(_currentIndex == 1),
-                scrollController: _hideController.controller),
-            // Profile Page
-            ContactsScreen(
-              scrollController: _hideController.controller,
-            ),
-            // Settings Page
-            Container(
-              color: Colors.green,
-              child: const Center(
-                child: Text('Settings Page', style: TextStyle(fontSize: 24)),
-              ),
-            ),
-          ],
         ),
       ),
     );

@@ -28,29 +28,38 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  awesome_notifications: 0.10.0
   bloc: ^9.0.0
+  cached_network_image: ^3.4.1
   cloud_firestore: ^5.6.6
+  connectivity_plus: ^6.0.1
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
-  device_preview: ^1.2.0
+  dio: ^5.8.0+1
   equatable: ^2.0.7
   firebase_auth: ^5.5.2
   firebase_core: ^3.13.0
+  firebase_messaging: ^15.2.5
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.0
   flutter_dotenv: ^5.2.1
   flutter_launcher_icons: ^0.14.3
+  flutter_local_notifications: ^19.1.0
   flutter_native_splash: ^2.4.4
   flutter_screenutil: ^5.9.3
+  flutter_secure_storage: ^9.2.4
   flutter_slidable: ^4.0.0
   flutter_svg: ^2.0.17
   fluttertoast: ^8.2.12
   freezed_annotation: ^2.4.4
   get_it: ^8.0.3
+  googleapis_auth: ^2.0.0
   iconsax: ^0.0.8
   intl: ^0.19.0
   meta: ^1.16.0
+  retrofit: ^4.4.2
+  shared_preferences: ^2.5.3
   uuid: ^4.5.1
 
 dev_dependencies:
@@ -59,6 +68,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   freezed: ^2.5.8
+  retrofit_generator: ^9.1.9
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -74,6 +84,7 @@ flutter:
   assets:
     - assets/images/
     - .env
+    - assets/notification_key/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
   # For details regarding adding assets from package dependencies, see

@@ -30,10 +30,10 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void _validateAndSubmit() {
+  void _validateAndSubmit() async {
     final isValid = _formKey.currentState!.validate();
     if (isValid) {
-      context.read<SigninCubit>().signInWithEmailAndPassword(
+      await context.read<SigninCubit>().signInWithEmailAndPassword(
             email: _emailController.text,
             password: _passwordController.text,
           );
@@ -70,7 +70,8 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: SingleChildScrollView(
                 keyboardDismissBehavior:
-                    ScrollViewKeyboardDismissBehavior.manual,
+                    ScrollViewKeyboardDismissBehavior.onDrag,
+                physics: const ClampingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

@@ -1,14 +1,14 @@
 import 'package:chat/features/auth/domin/entities/user_entity.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatEntity {
   final String id;
   final List<String> participants;
   final UserEntity? otherUserInfo; // Direct reference to the other user's info
   final String lastMessage;
-  final String lastMessageTime;
+  final Timestamp lastMessageTime;
   final String lastSenderId;
-  final int unreadCount;
-  final String createdAt;
+  final Timestamp createdAt;
 
   ChatEntity({
     required this.createdAt,
@@ -18,18 +18,8 @@ class ChatEntity {
     required this.lastMessage,
     required this.lastMessageTime,
     required this.lastSenderId,
-    required this.unreadCount,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'participants': participants,
-      'lastMessage': lastMessage,
-      'lastMessageTime': lastMessageTime,
-      'lastSenderId': lastSenderId,
-      'unreadCount': unreadCount,
-    };
-  }
+
 }
 

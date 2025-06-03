@@ -2,11 +2,17 @@ import 'package:chat/core/errors/exceptions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseAuthService {
+  final FirebaseAuth _auth;
+
+  FirebaseAuthService({FirebaseAuth? auth})
+      : _auth = auth ?? FirebaseAuth.instance;
+      
+  /// Returns the current authenticated user or null if not authenticated
+  User? get currentUser => _auth.currentUser;
   Future<User> createUserWithEmailAndPassword(
       {required String email, required String password}) async {
     try {
-      final credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final credential = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -30,7 +36,7 @@ class FirebaseAuthService {
   Future<User> signInWithEmailAndPassword(
       {required String email, required String password}) async {
     try {
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      final credential = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );

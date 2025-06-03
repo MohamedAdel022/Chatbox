@@ -10,22 +10,23 @@ class ChatModel extends ChatEntity {
     required super.lastMessage,
     required super.lastMessageTime,
     required super.lastSenderId,
-    required super.unreadCount,
     required super.createdAt,
   });
 
-  factory ChatModel.fromJson(Map<String, dynamic> json, {UserEntity? otherUser}) {
+  factory ChatModel.fromJson(Map<String, dynamic> json,
+      {UserEntity? otherUser}) {
     return ChatModel(
       id: json['id'],
       participants: List<String>.from(json['participants']),
       otherUserInfo: otherUser, // Pass the other user info directly
       lastMessage: json['lastMessage'],
       lastMessageTime: json['lastMessageTime'] is Timestamp
-          ? (json['lastMessageTime'] as Timestamp).toDate().toIso8601String()
-          : json['lastMessageTime'],
+          ? json['lastMessageTime'] as Timestamp
+          : Timestamp.fromDate(DateTime.parse(json['lastMessageTime'])),
       lastSenderId: json['lastSenderId'],
-      unreadCount: json['unreadCount'],
-      createdAt: json['createdAt'],
+      createdAt: json['createdAt'] is Timestamp
+          ? json['createdAt'] as Timestamp
+          : Timestamp.fromDate(DateTime.parse(json['createdAt'])),
     );
   }
 
@@ -36,7 +37,6 @@ class ChatModel extends ChatEntity {
       'lastMessage': lastMessage,
       'lastMessageTime': lastMessageTime,
       'lastSenderId': lastSenderId,
-      'unreadCount': unreadCount,
       'createdAt': createdAt,
     };
   }
@@ -47,10 +47,9 @@ class ChatModel extends ChatEntity {
       participants: [],
       otherUserInfo: null, // No user info for empty model
       lastMessage: '',
-      lastMessageTime: DateTime.now().toIso8601String(),
+      lastMessageTime: Timestamp.now(),
       lastSenderId: '',
-      unreadCount: 0,
-      createdAt: DateTime.now().toIso8601String(),
+      createdAt: Timestamp.now(),
     );
   }
 }

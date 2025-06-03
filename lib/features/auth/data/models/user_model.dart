@@ -1,5 +1,4 @@
 import 'package:chat/features/auth/domin/entities/user_entity.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel extends UserEntity {
@@ -22,41 +21,41 @@ class UserModel extends UserEntity {
       imageUrl: json['imageUrl'],
       bio: json['bio'],
       createdAt: json['createdAt'] is Timestamp
-          ? (json['createdAt'] as Timestamp).toDate()
-          : DateTime.parse(json['createdAt']),
+          ? json['createdAt'] as Timestamp
+          : Timestamp.fromDate(DateTime.parse(json['createdAt'])),
       lastActive: json['lastActive'] is Timestamp
-          ? (json['lastActive'] as Timestamp).toDate()
-          : DateTime.parse(json['lastActive']),
+          ? json['lastActive'] as Timestamp
+          : Timestamp.fromDate(DateTime.parse(json['lastActive'])),
       isOnline: json['isOnline'],
       pushToken: json['pushToken'],
     );
   }
 
-  Map<String, dynamic> toJson() {
+
+  factory UserModel.fromEntity(UserEntity user) {
+    return UserModel(
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        imageUrl: user.imageUrl,
+        bio: user.bio,
+        createdAt: user.createdAt,
+        lastActive: user.lastActive,
+        isOnline: user.isOnline,
+        pushToken: user.pushToken);
+  }
+    Map<String, dynamic> toMap() {
     return {
       'id': id,
       'name': name,
       'email': email,
       'imageUrl': imageUrl,
       'bio': bio,
-      'createdAt': createdAt,
-      'lastActive': lastActive,
+      // Convert Timestamp to ISO8601 string for JSON serialization
+      'createdAt': createdAt.toDate().toIso8601String(),
+      'lastActive': lastActive.toDate().toIso8601String(),
       'isOnline': isOnline,
       'pushToken': pushToken,
     };
-  }
-
-  factory UserModel.fromFirebaseUser(User user) {
-    return UserModel(
-      id: user.uid,
-      name: user.displayName ?? '',
-      email: user.email ?? '',
-      imageUrl: user.photoURL ?? '',
-      bio: '',
-      createdAt: DateTime.now(),
-      lastActive: DateTime.now(),
-      isOnline: true,
-      pushToken: '',
-    );
   }
 }

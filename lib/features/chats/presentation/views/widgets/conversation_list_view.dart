@@ -4,6 +4,7 @@ import 'package:chat/core/widgets/loading_indicator.dart';
 import 'package:chat/features/chats/domain/entities/chat_entity.dart';
 import 'package:chat/features/chats/presentation/manager/chat_cubit/chat_cubit.dart';
 import 'package:chat/features/chats/presentation/manager/chat_cubit/chat_state.dart';
+import 'package:chat/features/chats/presentation/manager/unread_count_cubit/unread_count_cubit.dart';
 import 'package:chat/features/chats/presentation/views/widgets/conversation_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,6 +19,27 @@ class ConversationListView extends StatefulWidget {
 }
 
 class _ConversationListViewState extends State<ConversationListView> {
+  // Track the previously registered chats to avoid unnecessary re-registration
+  Set<String> _registeredChatIds = {};
+
+  // Helper method to register chats for tracking
+  void _registerChatsForTracking(List<ChatEntity> chats) {
+    if (chats.isEmpty) return;
+
+    final unreadCountCubit = context.read<UnreadCountCubit>();
+    final chatIds = chats.map((chat) => chat.id).toSet();
+
+    // Only track new chats that weren't previously registered
+    for (final chatId in chatIds) {
+      if (!_registeredChatIds.contains(chatId)) {
+        unreadCountCubit.trackChat(chatId);
+      }
+    }
+
+    // Update our tracking set
+    _registeredChatIds = chatIds;
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ChatCubit, ChatState>(
@@ -39,6 +61,9 @@ class _ConversationListViewState extends State<ConversationListView> {
       return _buildEmptyChatsList();
     }
 
+    // Register all chats for tracking unread counts
+    _registerChatsForTracking(chats);
+
     return ListView.builder(
       controller: widget.scrollController,
       itemCount: chats.length,
@@ -52,8 +77,11 @@ class _ConversationListViewState extends State<ConversationListView> {
             onTap: () {
               Navigator.pushNamed(
                 context,
-                Routes.chatScreen,
-                arguments: chat.otherUserInfo,
+                Routes.messagesScreen,
+                arguments: {
+                  'user': chat.otherUserInfo,
+                  'chatId': chat.id,
+                },
               );
             },
             child: Padding(
@@ -74,17 +102,12 @@ class _ConversationListViewState extends State<ConversationListView> {
           const Icon(Icons.chat_bubble_outline, size: 50, color: Colors.grey),
           const SizedBox(height: 16),
           const Text(
-            'No chats found',
+            'You don\'t have chats yet, Start one ',
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: 8),
-          TextButton(
-            onPressed: () => context.read<ChatCubit>().refreshChats(),
-            child: const Text('Refresh'),
-          )
         ],
       ),
     );

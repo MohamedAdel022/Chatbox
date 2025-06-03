@@ -9,8 +9,6 @@ abstract class ChatRepository {
 
   // Stream methods
   Stream<List<ChatEntity>> chatsStream(String userId);
+  Stream<int> unreadMessagesCountStream(String chatId, String currentUserId);
   Future<String> getCurrentUserId();
-  
-
 }
-

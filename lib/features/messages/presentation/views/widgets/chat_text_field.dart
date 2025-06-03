@@ -7,7 +7,12 @@ import 'package:iconsax/iconsax.dart';
 class ChatTextField extends StatelessWidget {
   const ChatTextField({
     super.key,
+    required this.controller,
+    required this.onSend,
   });
+  
+  final TextEditingController controller;
+  final VoidCallback onSend;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +29,7 @@ class ChatTextField extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               child: TextField(
+                controller: controller,
                 minLines: 1, // Start with 1 line
                 maxLines: 3, // Allow up to 3 lines for longer text
                 textAlignVertical:
@@ -38,6 +44,8 @@ class ChatTextField extends StatelessWidget {
                     vertical: 10.h,
                   ),
                 ),
+                // Allow sending on Enter key press (desktop/web support)
+                onSubmitted: (_) => onSend(),
               ),
             ),
           ),
@@ -48,7 +56,7 @@ class ChatTextField extends StatelessWidget {
               Iconsax.send_1,
               color: Colors.white,
             )),
-            onPressed: () {},
+            onPressed: onSend,
           ),
         ],
       ),

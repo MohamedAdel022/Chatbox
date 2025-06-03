@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 
 class LoginActions extends StatelessWidget {
   final bool isLoading;
-  final VoidCallback onLogin;
-  final VoidCallback onForgotPassword;
-  final VoidCallback onSignUp;
+  final VoidCallback? onLogin;
+  final VoidCallback? onForgotPassword;
+  final VoidCallback? onSignUp;
 
   const LoginActions({
     super.key,
     required this.isLoading,
-    required this.onLogin,
-    required this.onForgotPassword,
-    required this.onSignUp,
+    this.onLogin,
+    this.onForgotPassword,
+    this.onSignUp,
   });
 
   @override
@@ -22,11 +22,10 @@ class LoginActions extends StatelessWidget {
     return Column(
       children: [
         CustomButton(
-          
           text: 'Log In',
           backgroundColor: AppTheme.primaryColor,
           foregroundColor: Colors.white,
-          onPressed: onLogin,
+          onPressed: isLoading ? null : onLogin,
           isLoading: isLoading,
         ),
         _buildForgotPasswordButton(),
@@ -37,7 +36,7 @@ class LoginActions extends StatelessWidget {
   Widget _buildForgotPasswordButton() {
     return Center(
       child: TextButton(
-        onPressed: onForgotPassword,
+        onPressed: isLoading ? null : onForgotPassword,
         child: Text(
           'Forgot password?',
           style: AppTextStyle.regularGreen14,

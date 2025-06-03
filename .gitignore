@@ -16,6 +16,7 @@ test.exe
 .svn/
 .swiftpm/
 migrate_working_dir/
+assets/notification_key
 
 # IntelliJ related
 *.iml

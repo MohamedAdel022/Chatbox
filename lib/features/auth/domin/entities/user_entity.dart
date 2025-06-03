@@ -1,11 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class UserEntity {
   final String id;
   final String name;
   final String email;
   final String imageUrl;
   final String bio;
-  final DateTime createdAt;
-  final DateTime lastActive;
+  final Timestamp createdAt;
+  final Timestamp lastActive;
   final bool isOnline;
   final String pushToken;
 
@@ -19,19 +21,5 @@ class UserEntity {
     required this.lastActive,
     required this.isOnline,
     required this.pushToken,
-  });
-
-  toMap() {
-    return {
-      'id': id,
-      'name': name,
-      'email': email,
-      'imageUrl': imageUrl,
-      'bio': bio,
-      'createdAt': createdAt,
-      'lastActive': lastActive,
-      'isOnline': isOnline,
-      'pushToken': pushToken,
-    };
-  }
+  }); 
 }

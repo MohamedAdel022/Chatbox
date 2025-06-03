@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:chat/core/errors/failures.dart';
+import 'package:chat/core/service/time_service.dart';
+import 'package:chat/core/utils/endpoints.dart';
 import 'package:chat/features/auth/data/models/user_model.dart';
 import 'package:chat/features/auth/domin/entities/user_entity.dart';
 import 'package:chat/features/chats/data/models/chat_model.dart';
@@ -12,13 +14,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class ChatRepositoryImpl implements ChatRepository {
   final FirebaseFirestore firestore;
+  final TimeService timeService;
+  final FirebaseAuth firebaseAuth;
 
-  ChatRepositoryImpl(this.firestore);
+  ChatRepositoryImpl({
+    required this.firestore,
+    required this.timeService,
+    required this.firebaseAuth,
+  });
 
   @override
   Future<Either<Failure, List<ChatEntity>>> getChats(String userId) async {
     try {
-      final chatsRef = firestore.collection('chats');
+      final chatsRef = firestore.collection(Endpoints.chats);
       final query = chatsRef.where('participants', arrayContains: userId);
 
       final snapshot = await query.get();
@@ -49,7 +57,8 @@ class ChatRepositoryImpl implements ChatRepository {
 
   Future<UserEntity?> _fetchUserInfo(String userId) async {
     try {
-      final userDoc = await firestore.collection('users').doc(userId).get();
+      final userDoc =
+          await firestore.collection(Endpoints.users).doc(userId).get();
       if (userDoc.exists) {
         final userData = {...userDoc.data()!};
         return UserModel.fromJson(userData);
@@ -64,7 +73,7 @@ class ChatRepositoryImpl implements ChatRepository {
   @override
   Future<Either<Failure, String>> createChat(String email) async {
     final query =
-        firestore.collection('users').where('email', isEqualTo: email);
+        firestore.collection(Endpoints.users).where('email', isEqualTo: email);
     final snapshot = await query.get();
 
     if (snapshot.docs.isEmpty) {
@@ -73,7 +82,7 @@ class ChatRepositoryImpl implements ChatRepository {
     final userId = snapshot.docs.first.id;
     final myId = await getCurrentUserId();
     List<String> participants = [userId, myId]..sort();
-    final chatRef = firestore.collection('chats');
+    final chatRef = firestore.collection(Endpoints.chats);
     final chatDoc = await chatRef.doc(participants.join('_')).get();
     if (chatDoc.exists) {
       return Left(ServerFailure('Chat already exists'));
@@ -82,10 +91,9 @@ class ChatRepositoryImpl implements ChatRepository {
       id: participants.join('_'),
       participants: participants,
       lastMessage: '',
-      lastMessageTime: DateTime.now().toIso8601String(),
+      lastMessageTime: timeService.getNowTimestamp(),
       lastSenderId: '',
-      unreadCount: 0,
-      createdAt: DateTime.now().toIso8601String(),
+      createdAt: timeService.getNowTimestamp(),
     );
     await chatRef.doc(chatData.id).set(chatData.toJson());
     return Right(chatData.id);
@@ -115,8 +123,27 @@ class ChatRepositoryImpl implements ChatRepository {
   }
 
   @override
+  Stream<int> unreadMessagesCountStream(String chatId, String currentUserId) {
+    return firestore
+        .collection('chats')
+        .doc(chatId)
+        .collection('messages')
+        .snapshots()
+        .map((snapshot) {
+      // Filter out messages that are unread and not from the current user
+      final unreadMessages = snapshot.docs
+          .map((doc) => doc.data())
+          .where((data) => data['isRead'] == false)
+          .where((data) => data['fromId'] != currentUserId)
+          .toList();
+
+      return unreadMessages.length;
+    });
+  }
+
+  @override
   Future<String> getCurrentUserId() async {
-    final user = FirebaseAuth.instance.currentUser;
+    final user = firebaseAuth.currentUser;
     if (user == null) {
       throw Exception('User not found');
     }

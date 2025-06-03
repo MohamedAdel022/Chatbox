@@ -6,50 +6,39 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatCubit extends Cubit<ChatState> {
-  final ChatRepository _messageRepository;
+  final ChatRepository _chatRepository;
+  final FirebaseAuth _firebaseAuth;
   StreamSubscription<List<ChatEntity>>? _chatSubscription;
+  //to prevent multiple subscriptions
   bool _initialized = false;
 
-  ChatCubit({required ChatRepository messageRepository})
-      : _messageRepository = messageRepository,
+  ChatCubit({
+    required ChatRepository messageRepository,
+    required FirebaseAuth firebaseAuth,
+  })  : _chatRepository = messageRepository,
+        _firebaseAuth = firebaseAuth,
         super(const ChatInitialState()) {
     // Start listening to the chat stream as soon as the cubit is created
     _startChatStream();
   }
 
-  Future<void> getChats() async {
-    emit(const ChatLoadingState());
-
-    final currentUser = FirebaseAuth.instance.currentUser;
-    if (currentUser == null) {
-      emit(const ChatErrorState('User not authenticated'));
-      return;
-    }
-
-    final result = await _messageRepository.getChats(currentUser.uid);
-
-    result.fold(
-      (failure) => emit(ChatErrorState(failure.message)),
-      (chats) => emit(ChatsLoadedState(chats)),
-    );
-  }
 
   Future<void> createChat(String email) async {
     emit(const ChatLoadingState());
 
-    final currentUser = FirebaseAuth.instance.currentUser;
+    final currentUser = _firebaseAuth.currentUser;
     if (currentUser == null) {
       emit(const ChatErrorState('User not authenticated'));
       return;
     }
 
-    final result = await _messageRepository.createChat(email);
+    final result = await _chatRepository.createChat(email);
 
     result.fold(
       (failure) => emit(ChatErrorState(failure.message)),
       (chatId) => emit(ChatCreatedState(chatId)),
     );
-    
+
     // After creating a new chat, refresh the chat list
     _startChatStream();
   }
@@ -59,19 +48,19 @@ class ChatCubit extends Cubit<ChatState> {
     if (_chatSubscription != null && _initialized) {
       return;
     }
-    
+
     // Cancel any existing subscription to avoid memory leaks
     _chatSubscription?.cancel();
     _chatSubscription = null;
-    
-    final currentUser = FirebaseAuth.instance.currentUser;
+
+    final currentUser = _firebaseAuth.currentUser;
     if (currentUser == null) {
       emit(const ChatErrorState('User not authenticated'));
       return;
     }
 
     // Subscribe to the chat stream and emit states based on the stream events
-    _chatSubscription = _messageRepository.chatsStream(currentUser.uid).listen(
+    _chatSubscription = _chatRepository.chatsStream(currentUser.uid).listen(
       (chats) {
         emit(ChatsLoadedState(chats));
         _initialized = true;
@@ -82,7 +71,7 @@ class ChatCubit extends Cubit<ChatState> {
       },
     );
   }
-  
+
   void refreshChats() {
     // Force a refresh by resetting the initialization flag
     _initialized = false;
@@ -90,9 +79,11 @@ class ChatCubit extends Cubit<ChatState> {
     _startChatStream();
   }
 
+
+
   @override
   Future<void> close() {
-    // Clean up subscription when cubit is closed
+    // Clean up chat subscription when cubit is closed
     _chatSubscription?.cancel();
     _initialized = false;
     return super.close();

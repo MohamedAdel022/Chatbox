@@ -5,6 +5,7 @@ import 'package:chat/core/theme/app_text_style.dart';
 import 'package:chat/core/utils/assets.dart/assets.dart';
 import 'package:chat/core/widgets/custom_back_button.dart';
 import 'package:chat/features/auth/domin/entities/user_entity.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -51,10 +52,11 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  String _getLastActiveText(DateTime lastActive) {
+  String _getLastActiveText(Timestamp lastActive) {
     log(lastActive.toString());
     final now = DateTime.now();
-    final difference = now.difference(lastActive);
+    final lastActiveDateTime = lastActive.toDate();
+    final difference = now.difference(lastActiveDateTime);
     log(difference.toString());
 
     if (difference.inSeconds < 60) {
@@ -69,7 +71,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
       final days = difference.inDays;
       return '$days ${days == 1 ? 'day' : 'days'} ago';
     } else {
-      return '${lastActive.day}/${lastActive.month}/${lastActive.year}';
+      return '${lastActiveDateTime.day}/${lastActiveDateTime.month}/${lastActiveDateTime.year}';
     }
   }
 }
