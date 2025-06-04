@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chat/core/widgets/loading_indicator.dart';
+import 'package:chat/features/chats/presentation/views/widgets/custom_image_placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -29,8 +30,7 @@ class CircleImage extends StatelessWidget {
         ),
       ),
       placeholder: (context, url) {
-        //ImageSkeletonLoader(radius: radius),
-        return LoadingIndicator();
+        return ImageSkeletonLoader(radius: radius);
       }, 
       errorWidget: (context, url, error) => const Icon(Icons.error),
     );

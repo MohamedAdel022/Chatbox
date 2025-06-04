@@ -7,14 +7,16 @@ import 'package:iconsax/iconsax.dart';
 class SenderMessageItem extends StatelessWidget {
   final String message;
   final String time;
-  final bool isRead;
+  final bool showReadMark;
+  final bool showUnreadMark;
   final bool isSending;
 
   const SenderMessageItem({
     super.key,
     required this.message,
     required this.time,
-    this.isRead = false,
+    this.showReadMark = false,
+    this.showUnreadMark = false,
     this.isSending = false,
   });
 
@@ -68,8 +70,12 @@ class SenderMessageItem extends StatelessWidget {
                       ),
                     )
                   : Icon(
-                      isRead ? Iconsax.tick_circle : Iconsax.tick_circle5,
-                      color: isRead ? AppTheme.secondaryColor : Colors.grey,
+                      showReadMark
+                          ? Iconsax.tick_circle
+                          : Iconsax.tick_circle5,
+                      color: showReadMark
+                          ? AppTheme.secondaryColor
+                          : (showUnreadMark ? Colors.grey : Colors.transparent),
                       size: 14,
                     ),
               ],

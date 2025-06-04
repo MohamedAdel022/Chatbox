@@ -12,6 +12,8 @@ class MessageItem extends StatefulWidget {
   final String currentUserId;
   final String chatId;
   final bool isSender;
+  final bool showReadMark;
+  final bool showUnreadMark;
 
   const MessageItem({
     super.key,
@@ -19,6 +21,8 @@ class MessageItem extends StatefulWidget {
     required this.currentUserId,
     required this.chatId,
     required this.isSender,
+    this.showReadMark = false,
+    this.showUnreadMark = false,
   });
 
   @override
@@ -78,7 +82,8 @@ class _MessageItemState extends State<MessageItem> {
         ? SenderMessageItem(
             message: widget.messageEntity.message,
             time: timeStr,
-            isRead: widget.messageEntity.isRead,
+            showReadMark: widget.showReadMark,
+            showUnreadMark: widget.showUnreadMark,
             isSending: isSending,
           )
         : ReceiverMessageItem(

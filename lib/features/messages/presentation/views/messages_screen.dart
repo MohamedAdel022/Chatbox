@@ -42,8 +42,11 @@ class _MessagesScreenState extends State<MessagesScreen> {
   // Separate method to handle async initialization
   Future<void> _loadUserData() async {
     final user = await getUser();
-    _currentUserId = user.id;
-    currentUser = user.name;
+    if (!mounted) return;
+    setState(() {
+      _currentUserId = user.id;
+      currentUser = user.name;
+    });
   }
 
   @override

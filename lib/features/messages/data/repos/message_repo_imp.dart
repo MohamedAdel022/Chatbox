@@ -49,12 +49,16 @@ class MessageRepoImp implements MessageRepo {
         .doc(message.id)
         .set(MessageModel.fromEntity(message).toMap());
     var user = await getUser();
-    if (fcmToken.isNotEmpty) {
+    //if current user is the same user that sent the message then don't send notification
+    if (user.id != message.fromId && fcmToken.isNotEmpty) {
       await fcmService.sendNotification(
         recipientFCMToken: fcmToken,
         title: senderName,
         body: message.message,
-        data: {'chatId': chatId,'user': jsonEncode(UserModel.fromEntity(user).toMap())},
+        data: {
+          'chatId': chatId,
+          'user': jsonEncode(UserModel.fromEntity(user).toMap())
+        },
       );
       await updateLastMessage(chatId, message);
     }

@@ -1,5 +1,6 @@
 import 'package:chat/core/widgets/loading_indicator.dart';
 import 'package:chat/features/chats/presentation/views/widgets/circle_image.dart';
+import 'package:chat/features/chats/presentation/views/widgets/custom_image_placeholder.dart';
 import 'package:chat/features/chats/presentation/views/widgets/default_user_image.dart';
 import 'package:flutter/material.dart';
 
@@ -19,8 +20,7 @@ class ProfileImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
-      // return ImageSkeletonLoader(radius: radius);
-      return LoadingIndicator();
+      return ImageSkeletonLoader(radius: radius);
     } else if (imageUrl.isNotEmpty) {
       return CircleImage(image: imageUrl, radius: radius);
     } else {
